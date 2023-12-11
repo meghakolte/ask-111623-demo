@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "8d6e3600-826d-489d-a1aa-3528f39b1736",
+		"name": "Sign-In",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29257442",
+		"_collection_link": "https://restless-shuttle-392575.postman.co/workspace/f95b6a79-b85b-453f-866a-534edc411953/collection/29257442-8d6e3600-826d-489d-a1aa-3528f39b1736?action=share&source=collection_link&creator=29257442"
+	},
+	"item": [
+		{
+			"name": "Sign-In",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate user email\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.user.email).to.eql(\"c7884a656b8758@crankymonkey.info\");",
+							"});",
+							"",
+							"pm.test(\"User role validation\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.user.role).to.eql(\"TEACHER\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"c7884a656b8758@crankymonkey.info\",\n  \"password\": \"demo@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/Sign-in",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"Sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "student-login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"artem.oganesyan@gmail.com\",\n  \"password\": \"12345Abc\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/Sign-in",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"Sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Successful login(student)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"jmjezov@billieb.shop\",\n  \"password\": \"welcome@90\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/Sign-in",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"Sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wrong credential",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"jmjezov@billieb.shop\",\n  \"password\": \"welcome@\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/Sign-in",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"Sign-in"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
